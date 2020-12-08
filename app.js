@@ -10,6 +10,69 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// Prompts to build user questionnaire, depending on which role the team member has.
+
+const rolePrompt = {
+    name: "role",
+    type: "checkbox",
+    message: "Role of team member:",
+    choices: ["Manager", "Engineer", "Intern"]
+};
+
+const managerPrompt = [
+    {
+        name: "Manager Prompt",
+        type: "input",
+        message: "Name of Manager",
+    },
+    {
+        name: "ID",
+        type: "input",
+        message: "Manager ID",
+    },
+    {
+        name: "Office Number",
+        type: "input",
+        message: "Office Number"
+    },
+];
+
+const engineerPrompt = [
+    {
+        name: "Engineer Prompt",
+        type: "input",
+        message: "Name of Engineer",
+    },
+    {
+        name: "ID",
+        type: "input",
+        message: "Engineer ID",
+    },
+    {
+        name: "GitHub",
+        type: "input",
+        message: "GitHub Username"
+    },
+];
+
+const internPrompt = [
+    {
+        name: "Intern Prompt",
+        type: "input",
+        message: "Name of Intern",
+    },
+    {
+        name: "ID",
+        type: "input",
+        message: "Intern ID",
+    },
+    {
+        name: "School",
+        type: "input",
+        message: "Intern's School"
+    },
+];
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
