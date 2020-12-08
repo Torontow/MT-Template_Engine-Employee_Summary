@@ -9,12 +9,11 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
 // Prompts to build user questionnaire, depending on which role the team member has.
 
 const rolePrompt = {
     name: "role",
-    type: "checkbox",
+    type: "list",
     message: "Role of team member:",
     choices: ["Manager", "Engineer", "Intern"]
 };
@@ -72,6 +71,56 @@ const internPrompt = [
         message: "Intern's School"
     },
 ];
+
+let employees = [];
+
+const addEmployee = () =>
+    inquirer.prompt(rolePrompt).then((roleChoice) => {
+        let $role = roleChoice.role;
+        switch ($role) {
+            case "Manager":
+                inquirer.prompt(managerPrompt)
+                    .then((managerData) => {
+                        let managerName = managerData.name;
+                        let managerId = managerData.id;
+                        let managerEmail = managerData.email;
+                        let managerOffice = managerData.officeNumber
+
+                        const manager = new Manager(managerName, managerId, managerEmail, managerOffice);
+                        employees.push(manager);
+                    });
+                break;
+            case "Engineer":
+                inquirer.prompt(engineerPrompt)
+                    .then((engineerData) => {
+                        let engineerName = engineerData.name;
+                        let engineerId = engineerData.id;
+                        let engineerEmail = engineerData.email;
+                        let engineerGithub = engineerData.github;
+
+                        const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+                        employees.push(engineer);
+                    });
+                break;
+            case "Intern":
+                inquirer.prompt(internPrompt)
+                    .then((internData) => {
+                        let internName = internData.name;
+                        let internId = internData.id;
+                        let internEmail = internData.email;
+                        let engineerGithub = internData.github;
+
+                        const intern = new Intern(internName, internId, internEmail, engineerGithub);
+                        employees.push(intern);
+                    });
+                break;
+
+        }
+
+    });
+
+
+addEmployee();
 
 
 // Write code to use inquirer to gather information about the development team members,
