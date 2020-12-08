@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
 // Prompts to build user questionnaire, depending on which role the team member has.
 
 const rolePrompt = {
@@ -20,35 +21,45 @@ const rolePrompt = {
 
 const managerPrompt = [
     {
-        name: "Manager Prompt",
+        name: "name",
         type: "input",
         message: "Name of Manager",
     },
     {
-        name: "ID",
+        name: "id",
         type: "input",
         message: "Manager ID",
     },
     {
-        name: "Office Number",
+        name: "email",
         type: "input",
-        message: "Office Number"
+        message: "Manager's Email"
+    },
+    {
+        name: "officeNumber",
+        type: "input",
+        message: "Manager's Office Number"
     },
 ];
 
 const engineerPrompt = [
     {
-        name: "Engineer Prompt",
+        name: "name",
         type: "input",
         message: "Name of Engineer",
     },
     {
-        name: "ID",
+        name: "id",
         type: "input",
         message: "Engineer ID",
     },
     {
-        name: "GitHub",
+        name: "email",
+        type: "input",
+        message: "Engineer's Email"
+    },
+    {
+        name: "github",
         type: "input",
         message: "GitHub Username"
     },
@@ -56,37 +67,35 @@ const engineerPrompt = [
 
 const internPrompt = [
     {
-        name: "Intern Prompt",
+        name: "name",
         type: "input",
         message: "Name of Intern",
     },
     {
-        name: "ID",
+        name: "id",
         type: "input",
         message: "Intern ID",
     },
     {
-        name: "School",
+        name: "email",
+        type: "input",
+        message: "Intern's Email"
+    },
+    {
+        name: "school",
         type: "input",
         message: "Intern's School"
     },
 ];
 
+// Prompts the user to add another employee or render the output.
+
 const anotherPrompt = [
     {
-        name: "continue",
+        name: "next",
         type: "list",
         message: "Team member added. How would you like to proceed?",
-        choices: [
-            {
-                choice: 1,
-                value: "Add another team member"
-            },
-            {
-                choice: 2,
-                value: "Render Team Summary"
-            }
-        ]
+        choices: ["Add another team member","Render Team Summary"]
     }
 ];
 
@@ -94,24 +103,24 @@ let employees = [];
 
 
 
-// Asks the user what type of employee they would like to add and asks the appropriate questions depending on what user chooses.
-// Takes the data input and builds an employee object and adds it to the employees array.
+// Gather information about the team members and create objects for each team member.
 
-
-const addEmployee = () =>
+const addEmployees = () =>
     inquirer.prompt(rolePrompt).then((roleChoice) => {
-        let $role = roleChoice.role;
-        switch ($role) {
+        let role = roleChoice.role;
+        switch (role) {
             case "Manager":
                 inquirer.prompt(managerPrompt)
                     .then((managerData) => {
-                        let managerName = managerData.name;
-                        let managerId = managerData.id;
-                        let managerEmail = managerData.email;
+                        let managerName = managerData.managerName;
+                        let managerId = managerData.managerID;
+                        let managerEmail = managerData.managerEmail;
                         let managerOffice = managerData.officeNumber
 
                         const manager = new Manager(managerName, managerId, managerEmail, managerOffice);
+                        // console.log(`this is manager: ${manager}`);
                         employees.push(manager);
+                        addAnother();
                     });
                 break;
             case "Engineer":
@@ -124,6 +133,7 @@ const addEmployee = () =>
 
                         const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
                         employees.push(engineer);
+                        addAnother();
                     });
                 break;
             case "Intern":
@@ -132,19 +142,29 @@ const addEmployee = () =>
                         let internName = internData.name;
                         let internId = internData.id;
                         let internEmail = internData.email;
-                        let engineerGithub = internData.github;
+                        let engineerGithub = internData.school;
 
                         const intern = new Intern(internName, internId, internEmail, engineerGithub);
                         employees.push(intern);
+                        addAnother();
                     });
                 break;
-
-        }
-
-
+            }
+            const addAnother = () =>
+                inquirer.prompt(anotherPrompt)
+                    .then((answer) => {
+                        let choice = answer.next;
+                        switch (choice) {
+                            case "Add another team member":
+                                addEmployees();
+                            case "Render Team Summary":
+                                break;
+                        }
+                    });
     });
 
-addEmployee();
+addEmployees();
+console.log(employees);
 
 
 // Write code to use inquirer to gather information about the development team members,
