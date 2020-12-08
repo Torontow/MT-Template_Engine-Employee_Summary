@@ -72,7 +72,31 @@ const internPrompt = [
     },
 ];
 
+const anotherPrompt = [
+    {
+        name: "continue",
+        type: "list",
+        message: "Team member added. How would you like to proceed?",
+        choices: [
+            {
+                choice: 1,
+                value: "Add another team member"
+            },
+            {
+                choice: 2,
+                value: "Render Team Summary"
+            }
+        ]
+    }
+];
+
 let employees = [];
+
+
+
+// Asks the user what type of employee they would like to add and asks the appropriate questions depending on what user chooses.
+// Takes the data input and builds an employee object and adds it to the employees array.
+
 
 const addEmployee = () =>
     inquirer.prompt(rolePrompt).then((roleChoice) => {
@@ -117,8 +141,8 @@ const addEmployee = () =>
 
         }
 
-    });
 
+    });
 
 addEmployee();
 
