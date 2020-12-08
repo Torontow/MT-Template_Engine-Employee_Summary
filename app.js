@@ -93,9 +93,8 @@ const internPrompt = [
 const anotherPrompt = [
     {
         name: "next",
-        type: "list",
-        message: "Team member added. How would you like to proceed?",
-        choices: ["Add another team member","Render Team Summary"]
+        type: "confirm",
+        message: "Team member added. Add another? (enter NO to render the team summary)",
     }
 ];
 
@@ -112,13 +111,12 @@ const addEmployees = () =>
             case "Manager":
                 inquirer.prompt(managerPrompt)
                     .then((managerData) => {
-                        let managerName = managerData.managerName;
-                        let managerId = managerData.managerID;
-                        let managerEmail = managerData.managerEmail;
+                        let managerName = managerData.name;
+                        let managerId = managerData.id;
+                        let managerEmail = managerData.email;
                         let managerOffice = managerData.officeNumber
 
                         const manager = new Manager(managerName, managerId, managerEmail, managerOffice);
-                        // console.log(`this is manager: ${manager}`);
                         employees.push(manager);
                         addAnother();
                     });
@@ -154,19 +152,19 @@ const addEmployees = () =>
                 inquirer.prompt(anotherPrompt)
                     .then((answer) => {
                         let choice = answer.next;
-                        switch (choice) {
-                            case "Add another team member":
-                                addEmployees();
-                            case "Render Team Summary":
-                                break;
+                        if (choice) {
+                            addEmployees();
+                        } else {
+                            renderOutput(employees);
                         }
                     });
     });
 
 addEmployees();
-console.log(employees);
 
-
+const renderOutput = employees => {
+    console.log(employees);
+};
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
