@@ -4,7 +4,9 @@
 
 ## Description 
 
-Good day! When you create a team for a project, you would like to have a summary of team members in a file you can use to easily reference names, roles, contact information, and depending on their role, other pertinent information. Using Inquirer.js, this project allows a user to answer some questions about their team members and outputs a nice organized set of cards with all the employee information.
+Good day! When you create a team for a project, you would like to have a summary of those team members in a file you can use to easily reference names, roles, contact information, and depending on their role, other pertinent information. Using Inquirer.js, this CLI project allows a user to answer some questions about their team members and outputs an HTML file that, when opened, is nicely styled, organized, and user-friendly.
+
+![Screenshot](lib/screenshot.png)
 
 ## TABLE OF CONTENTS
 
@@ -17,11 +19,15 @@ Good day! When you create a team for a project, you would like to have a summary
 
 ## Installation
 
-Users will download the code from the github accout reference below. Note that Node.js, Inquirer.js, and Jest are required. Run npm install first to install dependencies, then run node app.js to begin.
+Users will retrieve the code from [this GitHub repository](https://github.com/Torontow/MT-Template_Engine-Employee_Summary). Note that Node.js, Inquirer.js, and Jest are required. Run `npm install` first to install dependencies, then run `node app.js` in an integrated terminal to begin.
 
 ## Usage
 
-When you hit enter after typing "node app.js", you will be asked to choose the role of the employee you would like to add. Then, depending on the role you choose, you will be asked to answer a series of questions requiring input. The questions vary slightly from role to role. For example, a manager will require an office number, but an intern will require a school. Once the questions are answered, you'll be asked if you'd like to add another. You may add as many as you wish. Once finished, you will select "no" when prompted in order to generate a new file called team.html which you will find in the output directory. It will be formatted so that each employee will appear in a card in the file with clickable email addresses and GitHub accounts, if applicable.
+Run `node app.js` in your terminal to begin. You will be asked to choose the `role` of the employee you would like to add (Manager, Engineer, or Intern). Then, depending on the role you choose, you will be asked to answer a series of questions requiring user input. Note: the questions do vary slightly depending on the role. For example, a Manager will require an office number, but an Intern will require a school name. 
+
+Once the questions are answered, you'll be prompted if you'd like to add another employee to the team. You may add as many as you wish. Once finished, select "no" when prompted, and a new file called `team.html` will be waiting for you in the `output` folder. 
+
+If you display the file in a browser, the file will be styled as above, containing as many team members as you wished. Click an email address to send the team member an email from your default email application. Click a GitHub name to be directed to that team member's GitHub profile.
 
 ## Contributing
 
