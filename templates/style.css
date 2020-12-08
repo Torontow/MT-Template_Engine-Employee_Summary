@@ -1,10 +1,46 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    color: blue;
-    background-color: greenyellow;
+    background-color: rgb(34,34,26);
 }
 
-h1,
-h2 {
+.team-heading {
+    background-color: rgb(252, 243, 211);
+    color: rgb(124, 110, 70);
+    border: solid 5px rgb(34,34,26);
+    font-family: 'Josefin Sans', sans-serif;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.team-area {
+    background-color: rgb(34,34,26);
+}
+
+.card-header {
     font-family: 'Nunito', sans-serif;
+    background-color: rgb(241, 230, 200);
+}
+
+.card-header h3 {
+    color: rgb(208,57,56);
+}
+
+.card-title {
+    color: rgb(88, 88, 143);
+}
+
+.employee-card {
+    background-color: rgb(234,223,191);
+    color: rgb(34,34,26);
+    margin-left: 10px;
+}
+
+.card-body {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(34,34,26);
+    background-color: rgb(252, 243, 211);
+}
+
+.fas {
+    color: rgb(195, 187, 78)
 }
